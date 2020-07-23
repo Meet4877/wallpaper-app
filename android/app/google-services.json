@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "704854233509",
+    "firebase_url": "https://wally-b102b.firebaseio.com",
+    "project_id": "wally-b102b",
+    "storage_bucket": "wally-b102b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704854233509:android:d5d3a7d347f89186c5d84c",
+        "android_client_info": {
+          "package_name": "meet4877.Wally"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704854233509-sqt99kpno2h3ddqojmm57sqia7gc905k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnZZR1-GCQwTkyjiBhkmRRFISrqAo_rrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704854233509-sqt99kpno2h3ddqojmm57sqia7gc905k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
