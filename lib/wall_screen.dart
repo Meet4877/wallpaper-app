@@ -4,6 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:Wally/fullscreen_image.dart';
+import 'package:firebase_admob/firebase_admob.dart';
+
+const String testdevice='';
 
 class WallScreen extends StatefulWidget {
   @override
@@ -11,14 +14,46 @@ class WallScreen extends StatefulWidget {
 }
 
 class _WallScreenState extends State<WallScreen> {
+
+  static final MobileAdTargetingInfo targetingInfo= new MobileAdTargetingInfo(
+    testDevices: <String>[],
+    keywords: <String>['wallpaper','walls','amoled','anime','naruto'],
+    birthday:new DateTime.now(),
+    childDirected:true,
+  );
+
+//  BannerAd _bannerAD;
+  InterstitialAd _interstitialAd;
+
+
   StreamSubscription<QuerySnapshot> subscription;
   List<DocumentSnapshot> WallpaperList;
   final CollectionReference collectionReference=Firestore.instance.collection("wallpaper");
 
+//  BannerAd createBannerAD(){
+//    return new BannerAd(adUnitId:"ca-app-pub-3241316951372005/9330579088" ,
+//        size: AdSize.banner,
+//        targetingInfo: targetingInfo,
+//        listener: (MobileAdEvent event){
+//          print("interstitial Event:$event");
+//        }
+//    );
+//  }
+  InterstitialAd createinterstitialAD(){
+    return new InterstitialAd(adUnitId: "ca-app-pub-3241316951372005/5008190698",
+
+        targetingInfo: targetingInfo,
+        listener: (MobileAdEvent event){
+          print("inters Event:$event");
+        }
+    );
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    FirebaseAdMob.instance.initialize(appId: "ca-app-pub-3241316951372005~1834947030");
+//    _bannerAD = createBannerAD()..load()..show();
     subscription=collectionReference.snapshots().listen((datasnapshot)=>{
       setState((){
         WallpaperList = datasnapshot.documents;
@@ -27,14 +62,32 @@ class _WallScreenState extends State<WallScreen> {
   }
   @override
   void dispose() {
+//    _bannerAD?.dispose();
+    _interstitialAd.dispose();
     subscription?.cancel();
     super.dispose();
   }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar:  new AppBar(title: new Text("Wally"),
+       appBar: AppBar(
+      centerTitle: true,
+      title: Text("Naruto Wallpaper"),
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+                  Colors.deepPurple,
+                  Colors.lightBlue,
+                  Colors.deepPurple
+                ])
+        ),
       ),
+    ),
+      //new AppBar(title: new Text("Wally"),
+
       body: WallpaperList!=null?
           new StaggeredGridView.countBuilder(
             padding: const EdgeInsets.all(8.0),
@@ -46,11 +99,14 @@ class _WallScreenState extends State<WallScreen> {
               elevation: 8.0,
               borderRadius: new BorderRadius.all(new Radius.circular(8.0)),
               child: new InkWell(
-                onTap: ()=>Navigator.push(context, new MaterialPageRoute
-                  (builder: (context)=>fullScreenImage(imgPath))),
+                onTap: (){
+                  //ads
+                  createinterstitialAD()..load()..show();
+                  Navigator.push(context, new MaterialPageRoute
+                  (builder: (context)=>fullScreenImage(imgPath)));},
                 child: new Hero(
                   tag: imgPath,
-                  child: new FadeInImage(placeholder:new AssetImage("assets/Capture.png"),
+                  child: new FadeInImage(placeholder:new AssetImage("assets/uchiha.jpg"),
                       image: new NetworkImage(imgPath),
                       fit:BoxFit.cover,
 

@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'wall_screen.dart';
 
+
 void main() {
   runApp(new MyApp());
 }
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Wally',
+      title: 'Naruto Wallpaper',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
