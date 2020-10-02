@@ -1,4 +1,3 @@
-# Wally
 
-Wally is wallpaper showing app.
+ wallpaper showing app.
 
