@@ -31,7 +31,7 @@ class _WallScreenState extends State<WallScreen> {
   final CollectionReference collectionReference=Firestore.instance.collection("wallpaper");
 
 //  BannerAd createBannerAD(){
-//    return new BannerAd(adUnitId:"ca-app-pub-3241316951372005/9330579088" ,
+//    return new BannerAd(adUnitId:"ca-app-pub-" ,
 //        size: AdSize.banner,
 //        targetingInfo: targetingInfo,
 //        listener: (MobileAdEvent event){
@@ -40,7 +40,7 @@ class _WallScreenState extends State<WallScreen> {
 //    );
 //  }
   InterstitialAd createinterstitialAD(){
-    return new InterstitialAd(adUnitId: "ca-app-pub-3241316951372005/5008190698",
+    return new InterstitialAd(adUnitId: "",
 
         targetingInfo: targetingInfo,
         listener: (MobileAdEvent event){
@@ -52,7 +52,7 @@ class _WallScreenState extends State<WallScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    FirebaseAdMob.instance.initialize(appId: "ca-app-pub-3241316951372005~1834947030");
+    FirebaseAdMob.instance.initialize(appId: "");
 //    _bannerAD = createBannerAD()..load()..show();
     subscription=collectionReference.snapshots().listen((datasnapshot)=>{
       setState((){
